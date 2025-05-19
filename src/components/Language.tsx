@@ -10,7 +10,7 @@ export function LanguageSwitcher() {
             onClick={() => setLang(lang === "es" ? "en" : "es")}
         >
             {lang === "es" ? <FaFlagUsa className="w-5 h-5" /> : <FaFlag className="w-5 h-5" />}
-            {lang === "es" ? "Inglés" : "Spanish"}
+            {lang === "es" ? "US" : "ES"}
         </button>
     );
 }
