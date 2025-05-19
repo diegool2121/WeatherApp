@@ -1,0 +1,10 @@
+{
+  "app_name": "Weather App",
+  "weather_in": "Weather in",
+  "temperature": "Temperature:",
+  "humidity": "Humidity:",
+  "description": "Description:", 
+  "search_button": "Search",
+  "search_placeholder": "Enter city name",
+  "user_location": "Use my location"
+}

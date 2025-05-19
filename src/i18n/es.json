@@ -1,0 +1,10 @@
+{
+  "app_name": "Aplicación del Clima",
+  "weather_in": "Clima en",
+  "temperature": "Temperatura:",
+  "humidity": "Humedad:",
+  "description": "Descripción:",
+  "search_button": "Buscar",
+  "search_placeholder": "Ingrese el nombre de la ciudad",
+  "user_location": "Usar mi ubicación"
+}
