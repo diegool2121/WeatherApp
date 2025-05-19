@@ -2,8 +2,8 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import axios from "axios";
-import Home from "./index";
-import { LanguageProvider } from "../context/LanguageContext";
+import Home from "../index";
+import { LanguageProvider } from "../../context/LanguageContext";
 
 // Mock de Axios
 jest.mock("axios");
