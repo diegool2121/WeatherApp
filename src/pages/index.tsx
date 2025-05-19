@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className={`min-h-screen bg-gradient-to-br ${gradient} flex items-center justify-center p-4 transition-all duration-1000`}>
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md text-center relative">
-        <h1 className="text-3xl font-bold text-blue-700 mb-4">☁️ {texts.app_name}.</h1>
+        <h1 className="text-3xl font-bold text-blue-700 mb-4">☁️ {texts.app_name}</h1>
 
         <CitySearch
           city={city}
