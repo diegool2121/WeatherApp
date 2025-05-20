@@ -4,8 +4,8 @@ Esta es una aplicación web creada con React y Next.js que permite consultar el 
 
 ---
 ## Screenshots App Us / ES
-![ES](assets/es.png)
-![US](assets/us.png)
+![ES](src/assets/es.png)
+![US](src/assets/us.png)
 ---
 
 ## Características principales
