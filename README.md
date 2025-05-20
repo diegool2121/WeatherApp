@@ -4,8 +4,8 @@ Esta es una aplicación web creada con React y Next.js que permite consultar el 
 
 ---
 ## Screenshots App Us / ES
-![alt text](../clima/src/assets/es.png)
-![alt text](../clima/src/assets/us.png)
+![ES](assets/es.png)
+![US](assets/us.png)
 ---
 
 ## Características principales
