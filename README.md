@@ -3,7 +3,7 @@
 Esta es una aplicación web creada con React y Next.js que permite consultar el clima actual de cualquier ciudad, mostrando información como temperatura, humedad y descripción del clima. Además, el fondo cambia dinámicamente con un gradiente de colores según la temperatura y el tipo de clima (soleado, nublado, lluvia, etc.) y con un adicional de que se pueda escoger el idioma entre Es o Us.
 
 ---
-## Screenshots App Us / ES
+## Screenshots App US / ES
 ![ES](src/assets/es.png)
 ![US](src/assets/us.png)
 ---
