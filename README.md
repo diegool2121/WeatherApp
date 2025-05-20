@@ -1,7 +1,11 @@
 # Aplicación del Clima 🌤️
 
-Esta es una aplicación web creada con React y Next.js que permite consultar el clima actual de cualquier ciudad, mostrando información como temperatura, humedad y descripción del clima. Además, el fondo cambia dinámicamente con un gradiente de colores según la temperatura y el tipo de clima (soleado, nublado, lluvia, etc.) y con un adicional de que se pueda escoger el idioma entre Es o Es.
+Esta es una aplicación web creada con React y Next.js que permite consultar el clima actual de cualquier ciudad, mostrando información como temperatura, humedad y descripción del clima. Además, el fondo cambia dinámicamente con un gradiente de colores según la temperatura y el tipo de clima (soleado, nublado, lluvia, etc.) y con un adicional de que se pueda escoger el idioma entre Es o Us.
 
+---
+## Screenshots App Us / ES
+![alt text](../clima/src/assets/es.png)
+![alt text](../clima/src/assets/us.png)
 ---
 
 ## Características principales
@@ -39,7 +43,8 @@ npm install
 ```
 3. Crea un archivo .env.local en la raíz del proyecto con tu API key de OpenWeather:
 ```bash
-NEXT_PUBLIC_API_KEY=tu_api_key_aqui
+NEXT_PUBLIC_WEATHER_API_KEY=tu_api_key_aqui
+NEXT_PUBLIC_WEATHER_API_BASE_URL=https://api.openweathermap.org
 ```
 3. Ejecuta la aplicación en modo desarrollo:
 ```bash
