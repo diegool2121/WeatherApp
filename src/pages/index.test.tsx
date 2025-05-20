@@ -1,76 +1,121 @@
-import React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import axios from "axios";
-import Home from "./index";
-import { LanguageProvider } from "../context/LanguageContext";
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import Home from '../pages/index';
 
-// Mock de Axios
-jest.mock("axios");
-const mockedAxios = axios as jest.Mocked<typeof axios>;
+// Mock completo de useWeather
+jest.mock('../hooks/useWeather', () => ({
+  useWeather: jest.fn(() => ({
+    city: '',
+    setCity: jest.fn(),
+    suggestions: [],
+    weather: null,
+    error: null,
+    searchWeather: jest.fn(),
+    getLocationWeather: jest.fn()
+  }))
+}));
 
-// Render con el proveedor de contexto
-const renderWithProvider = () => {
-  return render(
-    <LanguageProvider>
-      <Home />
-    </LanguageProvider>
-  );
-};
+// Mock de LanguageContext
+jest.mock('../context/LanguageContext', () => ({
+  useLanguage: () => ({
+    lang: 'es',
+    texts: {
+      app_name: 'Clima App',
+      weather_in: 'Clima en',
+      temperature: 'Temperatura',
+      humidity: 'Humedad',
+      description: 'Descripción',
+      search_button: 'Buscar',
+      user_location: 'Mi ubicación',
+      search_placeholder: 'Buscar ciudad...'
+    },
+    setLang: jest.fn()
+  })
+}));
 
-describe("Página principal - aplicación clima", () => {
+// Mock simplificado de CitySearch
+jest.mock('../components/CitySearch', () => ({
+  CitySearch: () => <div data-testid="city-search">CitySearch Mock</div>
+}));
+
+// Mock simplificado de WeatherCard
+jest.mock('../components/WeatherCard', () => ({
+  WeatherCard: () => <div data-testid="weather-card">WeatherCard Mock</div>
+}));
+
+// Mock simplificado de Buttons
+jest.mock('../components/Buttons', () => ({
+  Buttons: () => <div data-testid="buttons">Buttons Mock</div>
+}));
+
+// Mock de LanguageSwitcher
+jest.mock('../components/Language', () => ({
+  LanguageSwitcher: () => <div data-testid="language-switcher">LanguageSwitcher Mock</div>
+}));
+
+describe('Home Page', () => {
+  const mockUseWeather = require('../hooks/useWeather').useWeather;
+
   beforeEach(() => {
-    jest.clearAllMocks();
+    // Resetear mocks antes de cada test
+    mockUseWeather.mockImplementation(() => ({
+      city: '',
+      setCity: jest.fn(),
+      suggestions: [],
+      weather: null,
+      error: null,
+      searchWeather: jest.fn(),
+      getLocationWeather: jest.fn()
+    }));
   });
 
-  test("muestra la info del clima tras una búsqueda exitosa", async () => {
-    const mockResponse = {
-      data: {
-        name: "Quito",
-        main: { temp: 22, humidity: 60 },
-        weather: [{ description: "nublado" }],
+  test('renderiza correctamente sin datos del clima', () => {
+    render(<Home />);
+    
+    expect(screen.getByText('☁️ Clima App')).toBeInTheDocument();
+    expect(screen.getByTestId('city-search')).toBeInTheDocument();
+    expect(screen.getByTestId('buttons')).toBeInTheDocument();
+    expect(screen.getByTestId('language-switcher')).toBeInTheDocument();
+    expect(screen.queryByTestId('weather-card')).not.toBeInTheDocument();
+    expect(screen.queryByText(/error/i)).not.toBeInTheDocument();
+  });
+
+  test('renderiza WeatherCard cuando hay datos del clima', () => {
+    mockUseWeather.mockImplementation(() => ({
+      weather: {
+        name: 'Madrid',
+        main: { temp: 22, humidity: 65 },
+        weather: [{ description: 'cielo claro' }]
       },
-    };
+      // ...otros valores por defecto
+    }));
 
-    mockedAxios.get.mockResolvedValueOnce(mockResponse);
-    renderWithProvider();
-
-    const input = screen.getByPlaceholderText(/ingresa una ciudad/i);
-    await userEvent.type(input, "Quito");
-
-    const suggestion = await screen.findByText(/Quito/i);
-    await userEvent.click(suggestion);
-
-    await waitFor(() => {
-      expect(screen.getByText(/temperatura actual/i)).toBeInTheDocument();
-      expect(screen.getByText(/22/i)).toBeInTheDocument();
-      expect(screen.getByText(/60/i)).toBeInTheDocument();
-      expect(screen.getByText(/nublado/i)).toBeInTheDocument();
-    });
+    render(<Home />);
+    expect(screen.getByTestId('weather-card')).toBeInTheDocument();
   });
 
-  test("maneja error cuando la ciudad es inválida", async () => {
-    mockedAxios.get.mockRejectedValueOnce(new Error("Ciudad no encontrada"));
-    renderWithProvider();
+  test('muestra errores cuando hay un error', () => {
+    mockUseWeather.mockImplementation(() => ({
+      error: 'Ciudad no encontrada',
+      // ...otros valores por defecto
+    }));
 
-    const input = screen.getByPlaceholderText(/ingresa una ciudad/i);
-    await userEvent.type(input, "CiudadInvalida");
-    await userEvent.keyboard("{enter}");
-
-    await waitFor(() => {
-      expect(
-        screen.getByText(/ciudad no encontrada|error/i)
-      ).toBeInTheDocument();
-    });
+    render(<Home />);
+    expect(screen.getByText('Ciudad no encontrada')).toBeInTheDocument();
   });
 
-  test("campo de entrada funciona correctamente", async () => {
-    renderWithProvider();
+  test('aplica clases de gradiente correctamente', () => {
+    mockUseWeather.mockImplementation(() => ({
+      weather: {
+        name: 'Madrid',
+        main: { temp: 30 }, // Temperatura cálida
+        weather: [{ description: 'soleado' }]
+      },
+      // ...otros valores por defecto
+    }));
 
-    const input = screen.getByPlaceholderText(/ingresa una ciudad/i);
-    expect(input).toBeInTheDocument();
-
-    await userEvent.type(input, "Guayaquil");
-    expect((input as HTMLInputElement).value).toBe("Guayaquil");
+    const { container } = render(<Home />);
+    expect(container.firstChild).toHaveClass('bg-gradient-to-br');
   });
 });

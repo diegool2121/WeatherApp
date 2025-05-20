@@ -1,27 +1,25 @@
-import type { Config } from 'jest';
+import type { Config } from '@jest/types';
 
-const config: Config = {
+const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.jest.json',
-    },
+  setupFilesAfterEnv: ['@testing-library/jest-dom'],
+  moduleNameMapper: {
+    '\\.(css|less|sass|scss)$': 'identity-obj-proxy',
+    '^@/(.*)$': '<rootDir>/src/$1'
   },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  testMatch: ['**/?(*.)+(test).[tj]s?(x)'],
   transform: {
     '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(js|jsx)$': ['babel-jest', {
+      presets: ['@babel/preset-env', '@babel/preset-react']
+    }]
   },
-  moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-  },
-  testPathIgnorePatterns: [
-  "/node_modules/",
-    "<rootDir>/../",
-    ".vscode",  
-],
+  testPathIgnorePatterns: ['/node_modules/', '/.next/'],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.jest.json'
+    }
+  }, 
 };
 
 export default config;

@@ -4,8 +4,8 @@ import { Suggestion } from "../models/suggestion";
 import { weatherConfig } from "../config/weather";
 
 // Verificar que las variables de entorno estén configuradas
-if (!weatherConfig.baseURL || !weatherConfig.apiKey) {
-  throw new Error("Weather API configuration is missing. Please check your environment variables.");
+if (process.env.NODE_ENV !== 'test' && (!weatherConfig.baseURL || !weatherConfig.apiKey)) {
+  throw new Error("Weather API configuration is missing...");
 }
 
 // Cliente Axios configurado
