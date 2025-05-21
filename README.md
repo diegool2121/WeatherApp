@@ -34,7 +34,7 @@ Esta es una aplicación web creada con React y Next.js que permite consultar el 
 1. Clona este repositorio:
 
 ```bash
-git clone https://github.com/diegool2121/AppClima.git
+git clone https://github.com/diegool2121/WeatherApp.git
 ```
 
 2. Instala las dependencias:
