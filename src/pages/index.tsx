@@ -14,14 +14,24 @@ export default function Home() {
   let emoji = "😐";
   let emoji2 = "☁️"; 
 
-  if (weather) {
-    gradient = getTemperatureGradient(weather.main.temp);
-    const temp = weather.main.temp;
-    if (temp < 10) emoji = "🥶", emoji2 = "❄️";
-    else if (temp < 20) emoji = "😄", emoji2 = "⛅";
-    else if (temp < 30) emoji = "😎", emoji2 = "🍹";
-    else emoji = "🥵", emoji2 = "🔥";
+ if (weather) {
+  gradient = getTemperatureGradient(weather.main.temp);
+  const temp = weather.main.temp;
+
+  if (temp < 10) {
+    emoji = "🥶";
+    emoji2 = "❄️";
+  } else if (temp < 20) {
+    emoji = "😄";
+    emoji2 = "⛅";
+  } else if (temp < 30) {
+    emoji = "😎";
+    emoji2 = "🍹";
+  } else {
+    emoji = "🥵";
+    emoji2 = "🔥";
   }
+}
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${gradient} flex items-center justify-center p-4 transition-all duration-1000`}>
