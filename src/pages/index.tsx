@@ -36,10 +36,10 @@ export default function Home() {
   return (
     <div className={`min-h-screen bg-gradient-to-br ${gradient} flex items-center justify-center p-4 transition-all duration-1000`}>
 {/* Emojis adaptativos */}
-  <div className="absolute top-7 left-6 text-[150px] md:text-[350px] select-none pointer-events-none z-0">
+  <div className="absolute top-1 left-6 text-[150px] md:text-[350px] select-none pointer-events-none z-0">
     {emoji}
   </div>
-  <div className="absolute bottom-7 right-6 text-[150px] md:text-[350px] select-none pointer-events-none z-0">
+  <div className="absolute bottom-1 right-6 text-[150px] md:text-[350px] select-none pointer-events-none z-0">
     {emoji2}
   </div>
 
