@@ -55,7 +55,7 @@ const emojiSets = {
     const interval = setInterval(() => {
       if (!emojiContainerRef.current) return;
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < 10; i++) {
         const e = document.createElement("div");
         e.className = "emoji";
         e.textContent = activeSet[Math.floor(Math.random() * activeSet.length)];

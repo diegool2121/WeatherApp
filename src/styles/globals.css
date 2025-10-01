@@ -30,7 +30,7 @@ body {
 }
 .emoji {
   position: absolute;
-  font-size: 4rem;
+  font-size: 9rem;
   pointer-events: none;
   user-select: none;
   animation: fade 4s ease-in-out;
