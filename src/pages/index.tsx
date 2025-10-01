@@ -12,8 +12,6 @@ export default function Home() {
   const { texts } = useLanguage();
 
   let gradient = "from-blue-200 to-blue-500";
-  let emoji = "😐";
-  let emoji2 = "☁️";
 
 const emojiSets = {
   cold: [
