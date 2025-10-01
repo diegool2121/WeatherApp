@@ -11,9 +11,18 @@ export default function Home() {
   const { texts } = useLanguage();
 
   let gradient = "from-blue-200 to-blue-500";
+  let emoji = "😐";
+  let emoji2 = "☁️"; 
+
   if (weather) {
     gradient = getTemperatureGradient(weather.main.temp);
+    const temp = weather.main.temp;
+    if (temp < 10) emoji = "🥶", emoji2 = "❄️";
+    else if (temp < 20) emoji = "😄", emoji2 = "⛅";
+    else if (temp < 30) emoji = "😎", emoji2 = "🍹";
+    else emoji = "🥵", emoji2 = "🔥";
   }
+
   return (
     <div className={`min-h-screen bg-gradient-to-br ${gradient} flex items-center justify-center p-4 transition-all duration-1000`}>
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md text-center relative">
@@ -35,8 +44,16 @@ export default function Home() {
 
         {weather && <WeatherCard weather={weather} />}
       </div>
+
       <div className="absolute top-4 right-4 text-black">
-      <LanguageSwitcher />
+        <LanguageSwitcher />
+      </div>
+
+      <div className="fixed bottom-6 left-6 text-[350px] select-none pointer-events-none">
+        {emoji}
+      </div>
+      <div className="fixed top-6 right-6 text-[350px] select-none pointer-events-none">
+      {emoji2}
       </div>
     </div>
   );
