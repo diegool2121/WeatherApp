@@ -35,6 +35,15 @@ export default function Home() {
 
   return (
     <div className={`min-h-screen bg-gradient-to-br ${gradient} flex items-center justify-center p-4 transition-all duration-1000`}>
+{/* Emojis adaptativos */}
+  <div className="absolute top-6 left-6 text-[70px] md:text-[350px] select-none pointer-events-none z-0">
+    {emoji}
+  </div>
+  <div className="absolute bottom-6 right-6 text-[70px] md:text-[350px] select-none pointer-events-none z-0">
+    {emoji2}
+  </div>
+
+
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md text-center relative">
         <h1 className="text-3xl font-bold text-blue-700 mb-4">☁️ {texts.app_name}</h1>
 
@@ -57,13 +66,6 @@ export default function Home() {
 
       <div className="absolute top-4 right-4 text-black">
         <LanguageSwitcher />
-      </div>
-
-      <div className="fixed bottom-6 left-6 text-[350px] select-none pointer-events-none">
-        {emoji}
-      </div>
-      <div className="fixed top-6 right-6 text-[350px] select-none pointer-events-none">
-      {emoji2}
       </div>
     </div>
   );
